@@ -5,7 +5,12 @@ async function req(path, options = {}) {
     headers: { 'Content-Type': 'application/json' },
     ...options,
   });
-  return res.json();
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data?.message || 'API request failed');
+  }
+  return data;
 }
 
 export const api = {
