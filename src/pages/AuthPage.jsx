@@ -9,10 +9,10 @@ export default function AuthPage() {
   const { login, register } = useApp();
   const nav = useNavigate();
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const action = isRegister ? register : login;
-    const result = action(form);
+    const result = await action(form);
     if (!result.ok) return setError(result.message);
     nav('/');
   };
